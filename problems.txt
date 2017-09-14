@@ -1,0 +1,70 @@
+//Given a binary array, find the maximum number of consecutive 1s in this array.
+
+      var findMaxConsecutiveOnes = function(nums) {
+          var current = 0;
+          var max = 0;
+          for (i in nums) {
+              if (nums[i] === 1) {
+                  current += 1;
+                  if (current >= max) max = current;
+              } else {
+                  current = 0;
+              }
+          }
+
+          return max;
+      };
+
+//------------------------------------------------------------------------------------------
+//Given a binary tree, find its maximum depth.
+//The maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node.
+
+      var maxDepth = function(root) {
+          if (root === null) {
+              return 0;
+          }
+
+          return Math.max(maxDepth(root.right), maxDepth(root.left)) + 1;
+      };
+
+//------------------------------------------------------------------------------------------
+// There is a table World
+//
+// +-----------------+------------+------------+--------------+---------------+
+// | name            | continent  | area       | population   | gdp           |
+// +-----------------+------------+------------+--------------+---------------+
+// | Afghanistan     | Asia       | 652230     | 25500100     | 20343000      |
+// | Albania         | Europe     | 28748      | 2831741      | 12960000      |
+// | Algeria         | Africa     | 2381741    | 37100000     | 188681000     |
+// | Andorra         | Europe     | 468        | 78115        | 3712000       |
+// | Angola          | Africa     | 1246700    | 20609294     | 100990000     |
+// +-----------------+------------+------------+--------------+---------------+
+// A country is big if it has an area of bigger than 3 million square km or a population of more than 25 million.
+//
+// Write a SQL solution to output big countries' name, population and area.
+
+      SELECT
+          name, population, area
+      FROM
+          World
+      WHERE
+          population > 25000000 OR area > 3000000
+
+------------------------------------------------------------------------------------------
+Given two binary trees and imagine that when you put one of them to cover the other, some nodes of the two trees are overlapped while the others are not.
+
+      var mergeTrees = function(t1, t2) {
+          if (t1 && t2) {
+              t1.val += t2.val;
+
+              t1.left = mergeTrees(t1.left, t2.left);
+              t1.right = mergeTrees(t1.right, t2.right);
+
+          } else if (t1 == null){
+              return t2;
+          } else if (t2 == null) {
+              return t1;
+          }
+
+          return t1;
+      };
