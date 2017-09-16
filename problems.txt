@@ -68,3 +68,39 @@ Given two binary trees and imagine that when you put one of them to cover the ot
 
           return t1;
       };
+
+------------------------------------------------------------------------------------------
+Given an array of 2n integers, your task is to group these integers into n pairs of integer, say (a1, b1), (a2, b2), ..., (an, bn) which makes sum of min(ai, bi) for all i from 1 to n as large as possible.
+
+      var arrayPairSum = function(nums) {
+        nums.sort((a,b) => a-b );
+        var sum = 0;
+        for (i = 0; i < nums.length; i += 2) {
+          sum += Math.min(nums[i], nums[i+1]);
+        }
+
+        return sum;
+      };
+
+------------------------------------------------------------------------------------------
+Given a table salary, such as the one below, that has m=male and f=female values. Swap all f and m values (i.e., change all f values to m and vice versa) with a single update query and no intermediate temp table.
+
+
+      UPDATE salary
+      SET
+      sex = CASE sex
+        WHEN 'm' THEN 'f'
+        ELSE 'm'
+      END;
+
+------------------------------------------------------------------------------------------
+Given a string, you need to reverse the order of characters in each word within a sentence while still preserving whitespace and initial word order.
+
+      var reverseWords = function(s) {
+        s = s.split(" ");
+        for (i in s) {
+          s[i] = s[i].split("").reverse().join("");
+        }
+
+        return s.join(" ");
+      };
