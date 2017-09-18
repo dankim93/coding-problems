@@ -104,3 +104,64 @@ Given a string, you need to reverse the order of characters in each word within 
 
         return s.join(" ");
       };
+
+------------------------------------------------------------------------------------------
+X city opened a new cinema, many people would like to go to this cinema. The cinema also gives out a poster indicating the movies’ ratings and descriptions.
+
+      select
+          *
+      from
+          cinema
+      where
+          id % 2 = 1 AND description != 'boring'
+      ORDER BY
+          rating DESC;
+
+------------------------------------------------------------------------------------------
+You're given a matrix represented by a two-dimensional array, and two positive integers r and c representing the row number and column number of the wanted reshaped matrix, respectively.
+The reshaped matrix need to be filled with all the elements of the original matrix in the same row-traversing order as they were.
+
+If the 'reshape' operation with given parameters is possible and legal, output the new reshaped matrix; Otherwise, output the original matrix.
+
+      var matrixReshape = function(nums, r, c) {
+          var max = nums.length * nums[0].length;
+          if (r * c > max) return nums;
+          var reshaped = [];
+          var bucket = [];
+
+          for(i in nums) {
+              for(j in nums[0]) {
+                  if (bucket.length < c) {
+                      bucket.push(nums[i][j]);
+                  }
+
+                  if (bucket.length === c) {
+                      reshaped.push(bucket);
+                      bucket = [];
+                  }
+              }
+          }
+
+
+          return reshaped;
+      };
+
+------------------------------------------------------------------------------------------
+Given an array of integers, every element appears twice except for one. Find that single one.
+
+      var singleNumber = function(nums) {
+          let answer = new Object();
+          for(let i = 0; i < nums.length; i++) {
+              if (answer[nums[i]] === undefined) {
+                  answer[nums[i]] = 1;
+              } else {
+                  answer[nums[i]] += 1;
+              }
+          }
+
+          for(let i = 0; i < nums.length; i++) {
+              if (answer[nums[i]] <= 1) {
+                  return nums[i]
+              }
+          }
+      };
