@@ -196,3 +196,93 @@ Design an algorithm to find the maximum profit. You may complete as many transac
 
         return total;
       };
+
+------------------------------------------------------------------------------------------
+Given an array of size n, find the majority element. The majority element is the element that appears more than ⌊ n/2 ⌋ times.
+
+      var majorityElement = function(nums) {
+        let limit = nums.length / 2;
+        h = {};
+
+        for(let i = 0; i < nums.length; i++) {
+          if (h[nums[i]] === undefined) {
+              h[nums[i]] = 1;
+          } else {
+              h[nums[i]] += 1;
+          }
+
+          if (h[nums[i]] > limit) { return nums[i]; }
+        }
+      };
+
+------------------------------------------------------------------------------------------
+Given a string, find the first non-repeating character in it and return it's index. If it doesn't exist, return -1.
+
+      var firstUniqChar = function(s) {
+        for(i=0;i<s.length;i++){
+         if (s.indexOf(s[i])===s.lastIndexOf(s[i])){
+            return i;
+        }
+        }
+        return -1;
+      };
+
+------------------------------------------------------------------------------------------
+Write a function to delete a node (except the tail) in a singly linked list, given only access to that node.
+
+Supposed the linked list is 1 -> 2 -> 3 -> 4 and you are given the third node with value 3, the linked list should become 1 -> 2 -> 4 after calling your function.
+
+      var deleteNode = function(node) {
+          node.val = node.next.val;
+          node.next = node.next.next;
+
+      };
+
+------------------------------------------------------------------------------------------
+Given two strings s and t, write a function to determine if t is an anagram of s.
+
+For example,
+s = "anagram", t = "nagaram", return true.
+s = "rat", t = "car", return false.
+
+      var isAnagram = function(s, t) {
+          let h1 = {};
+          let h2 = {};
+
+          let i = 0;
+          for (i = 0; i < s.length; i++) {
+              if (h1[s[i]] === undefined) {
+                  h1[s[i]] = 1;
+              } else {
+                  h1[s[i]] += 1;
+              }
+          }
+
+          for (i = 0; i < t.length; i++) {
+              if (h2[t[i]] === undefined) {
+                  h2[t[i]] = 1;
+              } else {
+                  h2[t[i]] += 1;
+              }
+          }
+
+          for (i = 0; i < t.length; i++) {
+              if (h1[t[i]] === undefined ) {
+                  return false;
+              }
+              if (h1[t[i]] !== h2[t[i]]) {
+                  return false;
+              }
+          }
+
+          for (i=0; i< s.length; i++) {
+              if (h2[s[i]] === undefined) {
+                  return false;
+              }
+              if (h1[s[i]] !== h2[s[i]]) {
+                  return false;
+              }
+          }
+
+          return true;
+      };
