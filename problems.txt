@@ -286,3 +286,50 @@ s = "rat", t = "car", return false.
 
           return true;
       };
+
+
+------------------------------------------------------------------------------------------
+Reverse a singly linked list.
+
+      var reverseList = function reverseList(head) {
+          var prev = null;
+          while (head) {
+              var next = head.next;
+              head.next = prev;
+              prev = head;
+              head = next;
+          }
+          return prev;
+      }
+
+------------------------------------------------------------------------------------------
+Given an integer, write a function to determine if it is a power of three.
+
+      var isPowerOfThree = function(n) {
+          if (n <= 2 && n != 1) {
+              return false;
+          }
+          while (n > 1) {
+              n /= 3;
+              if (n > 1 && n < 3){
+                  return false;
+              }
+          }
+          return true;
+      };
+
+------------------------------------------------------------------------------------------
+Given a sorted array and a target value, return the index if the target is found. If not, return the index where it would be if it were inserted in order.
+
+      var searchInsert = function(nums, target) {
+          for (i = 0; i < nums.length; i++) {
+              if (target === nums[i]) return i;
+              if (target < nums[i]) {
+                  if (i === 0 && target < nums[0]) return 0;
+
+              }
+
+              if (target > nums[i] && i === nums.length - 1) return i + 1;
+              if (target > nums[i] && target < nums[i + 1]) return i + 1;
+          }
+      };
