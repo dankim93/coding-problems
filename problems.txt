@@ -722,3 +722,70 @@ def snail(array)
 end
 
 ------------------------------------------------------------------------------------------
+convert a string to a new string where each character in the new string is '(' if that character appears only once in the original string, or ')' if that character appears more than once in the original string. Ignore capitalization when determining if a character is a duplicate.
+
+Examples:
+
+"din" => "((("
+
+"recede" => "()()()"
+
+def duplicate_encode(word)
+  answer = ""
+
+  word.downcase.each_char do |c|
+    if word.downcase.count(c) > 1
+      answer << ")"
+    else
+      answer << "("
+    end
+  end
+  answer
+end
+------------------------------------------------------------------------------------------
+The function will take n (with: n>= 0) as parameter and will return the sum of the squares of the binomial coefficients on line n.
+
+##Examples:
+easyline(0) => 1
+easyline(1) => 2
+easyline(4) => 70
+easyline(50) => 100891344545564193334812497256
+
+def easyline(n)
+    pascal = [[1],[1,1]]
+    return 1 if n == 0
+    return 2 if n == 1
+
+    while pascal.length < n + 1
+      bucket = []
+
+      for i in 0..pascal[-1].length - 2
+
+        bucket << pascal[-1][i] + pascal[-1][i+1]
+
+      end
+
+        bucket.unshift(1)
+        bucket.push(1)
+        pascal << bucket
+
+    end
+
+    pascal[-1].inject {|sum, number| sum += number**2}
+
+end
+------------------------------------------------------------------------------------------
+Only worry about the following format:
+(123) 456-7890 (don't forget the space after the close parentheses)
+
+Examples:
+validPhoneNumber("(123) 456-7890")  =>  returns true
+validPhoneNumber("(1111)555 2345")  => returns false
+validPhoneNumber("(098) 123 4567")  => returns false
+
+def validPhoneNumber(phoneNumber)
+  return false if phoneNumber[5] != " "
+  return false if phoneNumber[-5] != "-"
+  true
+end
+------------------------------------------------------------------------------------------
