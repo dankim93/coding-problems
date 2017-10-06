@@ -760,19 +760,15 @@ def easyline(n)
       bucket = []
 
       for i in 0..pascal[-1].length - 2
-
         bucket << pascal[-1][i] + pascal[-1][i+1]
-
       end
 
         bucket.unshift(1)
         bucket.push(1)
         pascal << bucket
-
     end
 
     pascal[-1].inject {|sum, number| sum += number**2}
-
 end
 ------------------------------------------------------------------------------------------
 Only worry about the following format:
@@ -789,3 +785,81 @@ def validPhoneNumber(phoneNumber)
   true
 end
 ------------------------------------------------------------------------------------------
+Write a function that accepts an array of 10 integers (between 0 and 9), that returns a string of those numbers in the form of a phone number.
+
+def createPhoneNumber(numbers)
+  return "(#{numbers[0]}#{numbers[1]}#{numbers[2]}) #{numbers[3]}#{numbers[4]}#{numbers[5]}-#{numbers[6]}#{numbers[7]}#{numbers[8]}#{numbers[9]}"
+end
+
+------------------------------------------------------------------------------------------
+Write a function that will return the count of distinct case-insensitive alphabetic characters and numeric digits that occur more than once in the input string. The input string can be assumed to contain only alphabets (both uppercase and lowercase) and numeric digits.
+
+Example
+"abcde" -> 0 # no characters repeats more than once
+"aabbcde" -> 2 # 'a' and 'b'
+
+def duplicate_count(text)
+    hash = Hash.new(0)
+    text = text.downcase
+     text.each_char {|c| hash[c] += 1}
+     hash.values.count {|v| v>1}
+end
+------------------------------------------------------------------------------------------
+A digital root is the recursive sum of all the digits in a number. Given n, take the sum of the digits of n. If that value has two digits, continue reducing in this way until a single-digit number is produced. This is only applicable to the natural numbers.
+
+Example
+digital_root(942)
+=> 9 + 4 + 2
+=> 15 ...
+=> 1 + 5
+=> 6
+
+def digital_root(n)
+  length = n.to_s.length
+  sum = 0
+  number = n.to_s
+  while length > 1
+    number.each_char do |n|
+      sum += n.to_i
+    end
+    length = sum.to_s.length
+    number = sum.to_s
+    sum = 0
+
+  end
+   number.to_i
+end
+------------------------------------------------------------------------------------------
+Ask a small girl - "How old are you?". She always says strange things... Lets help her!
+For correct answer program should return int from 0 to 9.
+
+def get_age(age) age[0].to_i end
+------------------------------------------------------------------------------------------
+Sum of numbers from 1-n
+def f(n)
+  return false if n.nil?
+  return false if n.to_s.include?(".")
+  return false if n.is_a? String
+  return false if n == 0
+  return false if n < 0
+
+  (1..n).reduce {|sum, i| sum += i}
+end
+------------------------------------------------------------------------------------------
+A Narcissistic Number is a number which is the sum of its own digits, each raised to the power of the number of digits.
+
+For example, take 153 (3 digits):
+    1^3 + 5^3 + 3^3 = 1 + 125 + 27 = 153
+
+def narcissistic?( value )
+  value = value.to_s
+  sum = 0
+  value.each_char do |n|
+    sum += n.to_i** value.length
+  end
+  if sum == value.to_i
+    return true
+  else
+    return false
+  end
+end
