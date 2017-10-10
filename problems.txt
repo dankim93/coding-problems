@@ -948,12 +948,92 @@ def averages(arr)
   answer
 end
 ------------------------------------------------------------------------------------------
+Bob is preparing to pass IQ test. The most frequent task in this test is to find out which one of the given numbers differs from the others. Bob observed that one number usually differs from the others in evenness. Help Bob — to check his answers, he needs a program that among the given numbers finds one that is different in evenness, and return a position of this number.
 
+! Keep in mind that your task is to help Bob solve a real IQ test, which means indexes of the elements start from 1 (not 0)
 
+##Examples :
+iq_test("2 4 7 8 10") => 3 // Third number is odd, while the rest of the numbers are even
+iq_test("1 2 1 1") => 2 // Second number is even, while the rest of the numbers are odd
+
+def iq_test(numbers)
+  numbers = numbers.split.map {|c| c.to_i}
+  even = 0
+  odd = 0
+
+  for i in 0..2
+    numbers[i].even? ? even += 1 : odd += 1
+  end
+
+  if even > 1
+    numbers.each_with_index do |n,i|
+      return i + 1 if n % 2 != 0
+    end
+
+  elsif odd > 1
+    numbers.each_with_index do |n,i|
+      return i + 1 if n % 2 == 0
+    end
+  end
+
+end
 ------------------------------------------------------------------------------------------
+Your function will be passed the depth of the triangle and you code has to return the corresponding pascal triangle upto that depth
+The triangle should be returned as a nested array.
 
+pascal(5) # should return [[1],[1,1],[1,2,1],[1,3,3,1],[1,4,6,4,1]]
 
+def pascal(depth)
+  pascal = [[1],[1,1]]
+  return [[1]] if depth == 1
+  return pascal if depth == 2
+
+  while pascal.length < depth
+    bucket = []
+    for i in 0...pascal.length - 1
+      bucket << pascal[-1][i] + pascal[-1][i+1]
+    end
+
+    bucket.unshift(1)
+    bucket.push(1)
+    pascal << bucket
+  end
+
+  pascal
+end
 ------------------------------------------------------------------------------------------
+You are given a list/array which contains only integers (positive and negative). Your job is to sum only the numbers that are the same and consecutive. The result should be one list.
 
+#Examples:
+[1,4,4,4,0,4,3,3,1] # should return [1,12,0,4,6,1]
+[1,1,7,7,3] # should return [2,14,3]
+[-5,-5,7,7,12,0] # should return [-10,14,12,0]
 
+def sum_consecutives(s)
+    bucket = []
+    answer = []
+
+    s.each_with_index do |n, i|
+      if i != s.length - 1
+        if n == s[i+1]
+          bucket << n
+        elsif n != s[i+1] && !bucket.empty?
+          bucket << n
+          answer << bucket.inject(:+)
+          bucket = []
+        elsif n != s[i+1] && bucket.empty?
+          answer << n
+        end
+      elsif i == s.length - 1
+        if !bucket.empty?
+          bucket << n
+          answer << bucket.inject(:+)
+        else
+          answer << n
+        end
+      end
+    end
+    
+  answer
+end
 ------------------------------------------------------------------------------------------
